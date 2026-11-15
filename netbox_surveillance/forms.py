@@ -69,7 +69,8 @@ _OPTIONAL_FKS = {"recorder", "relay", "notification"}
 def _model_form(model):
     attrs = {
         fk: DynamicModelChoiceField(
-            queryset=_FK_QUERYSETS[fk](), required=fk in _OPTIONAL_FKS or (model is Notification and fk == "camera")
+            queryset=_FK_QUERYSETS[fk](),
+            required=not (fk in _OPTIONAL_FKS or (model is Notification and fk == "camera")),
         )
         for fk in FORM_FIELDS[model]
         if fk in _FK_QUERYSETS
