@@ -1,0 +1,21 @@
+{% extends 'generic/object.html' %}
+{% load helpers %}
+{# One detail template for every model: each field the edit form shows, as a row. #}
+{% block content %}
+<div class="row mb-3">
+  <div class="col col-md-8">
+    <div class="card">
+      <h2 class="card-header">{{ object|meta:"verbose_name"|bettertitle }}</h2>
+      <table class="table table-hover attr-table">
+        {% for name, value in fields %}
+        <tr>
+          <th scope="row">{{ name }}</th>
+          <td>{% if value.get_absolute_url %}{{ value|linkify }}{% else %}{{ value|placeholder }}{% endif %}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+    {% include 'inc/panels/tags.html' %}
+  </div>
+</div>
+{% endblock %}

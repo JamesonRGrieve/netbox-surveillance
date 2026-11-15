@@ -1,0 +1,33 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "netbox-surveillance"
+version = "0.0.1"
+description = "Vendor-neutral NetBox source of truth for IP cameras, NVRs and door stations: cameras and NVR channels, streams, recording and motion schedules, notifications, door relays, triggers and SIP"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "AGPL-3.0-or-later"
+authors = [{ name = "Jameson" }]
+keywords = ["netbox", "netbox-plugin", "cctv", "nvr", "camera", "doorbell", "frigate", "reolink", "doorbird"]
+classifiers = ["Framework :: Django", "Programming Language :: Python :: 3"]
+# Standalone: FKs only core NetBox (dcim.Device). No required_plugins.
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/JamesonRGrieve/netbox-surveillance"
+
+[tool.setuptools.packages.find]
+include = ["netbox_surveillance*"]
+
+[tool.setuptools.package-data]
+netbox_surveillance = ["templates/netbox_surveillance/*.html"]
+
+[tool.black]
+line-length = 120
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "netbox.settings"
+python_files = ["test_*.py"]
